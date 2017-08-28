@@ -123,5 +123,39 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Main3Activity.class);
         startActivity(intent);
     }
-    
+     @Override
+    public final void onSensorChanged(SensorEvent event) {
+        float sensorValue = event.values[0];
+        TextView currValue = ambientValue;
+        String envInfo="";
+        int currType=event.sensor.getType();
+        switch(currType){
+            case Sensor.TYPE_AMBIENT_TEMPERATURE:
+                envInfo=sensorValue+" degrees Celsius";
+                currValue=valueFields[AMBIENT];
+                break;
+            case Sensor.TYPE_LIGHT:
+                envInfo=sensorValue+" SI lux units";
+                currValue=valueFields[LIGHT];
+                break;
+            case Sensor.TYPE_PRESSURE:
+                envInfo=sensorValue+" hPa (millibars)";
+                currValue=valueFields[PRESSURE];
+                break;
+            case Sensor.TYPE_RELATIVE_HUMIDITY:
+                envInfo=sensorValue+" percent humidity";
+                currValue=valueFields[HUMIDITY];
+                break;
+            default: break;
+
+        }
+        currValue.setText(envInfo);
+        envSense=null;
+        senseManage.unregisterListener(this);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        senseManage.unregisterListener(this);
+    }
 }
