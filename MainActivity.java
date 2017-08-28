@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-public class MainActivity extends AppCompatActivity implements OnClickListener, SensorEventListener { {
+public abstract class MainActivity extends AppCompatActivity implements OnClickListener,SensorEventListener {
     Button b_read;
     TextView tv_text;
     private Button ambientBtn, lightBtn, pressureBtn, humidityBtn;
@@ -60,13 +60,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         senseManage = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
 
-        Button button = (Button) findViewById(R.id.button5);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToMain3Activity();
-            }
-        });
+      
     }
     public void onClick(View v)
     {
@@ -119,10 +113,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
         }
     }
-    private void goToMain3Activity() {
-        Intent intent = new Intent(this, Main3Activity.class);
-        startActivity(intent);
-    }
+   
      @Override
     public final void onSensorChanged(SensorEvent event) {
         float sensorValue = event.values[0];
