@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnClickListener, SensorEventListener { {
     Button b_read;
     TextView tv_text;
     private Button ambientBtn, lightBtn, pressureBtn, humidityBtn;
